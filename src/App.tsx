@@ -1,4 +1,4 @@
-import { NumberInput } from "./components/NumberInput";
+import { twMerge } from "tailwind-merge";
 import { useNumbersForm } from "./hooks/useNumbersForm";
 
 const App = () => {
@@ -25,25 +25,59 @@ const App = () => {
               Value Transformation Methods
             </h2>
 
-            <NumberInput
-              label="setValueAs approach"
-              {...register("withSetValueAs", {
-                setValueAs: (value) => {
-                  if (value === "" || value === undefined) return null;
-                  const num = Number(value);
-                  return Number.isNaN(num) ? null : num;
-                },
-              })}
-              placeholder="Enter a number (0-100)"
-              error={errors.withSetValueAs?.message}
-            />
+            <fieldset aria-label="setValueAs approach">
+              <label className="block">
+                <span className="block text-sm font-medium text-gray-700 mb-1">
+                  setValueAs approach
+                </span>
+                <input
+                  type="number"
+                  {...register("withSetValueAs", {
+                    setValueAs: (value) => {
+                      if (value === "" || value === undefined) return null;
+                      const num = Number(value);
+                      return Number.isNaN(num) ? null : num;
+                    },
+                  })}
+                  className={twMerge(
+                    "w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none",
+                    errors.withSetValueAs
+                      ? "border-red-500 focus:border-red-500 focus:ring-4 focus:ring-red-200"
+                      : "border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500",
+                  )}
+                  placeholder="Enter a number (0-100)"
+                />
+              </label>
+              {errors.withSetValueAs && (
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.withSetValueAs.message}
+                </p>
+              )}
+            </fieldset>
 
-            <NumberInput
-              label="z.preprocess approach"
-              {...register("withPreprocess")}
-              placeholder="Enter a number (0-100)"
-              error={errors.withPreprocess?.message}
-            />
+            <fieldset aria-label="z.preprocess approach">
+              <label className="block">
+                <span className="block text-sm font-medium text-gray-700 mb-1">
+                  z.preprocess approach
+                </span>
+                <input
+                  type="number"
+                  {...register("withPreprocess")}
+                  className={twMerge(
+                    "w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none",
+                    errors.withPreprocess
+                      ? "border-red-500 focus:border-red-500 focus:ring-4 focus:ring-red-200"
+                      : "border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500",
+                  )}
+                  placeholder="Enter a number (0-100)"
+                />
+              </label>
+              {errors.withPreprocess && (
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.withPreprocess.message}
+                </p>
+              )}
+            </fieldset>
           </section>
 
           <button
