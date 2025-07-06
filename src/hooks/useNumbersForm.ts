@@ -15,6 +15,7 @@ export const useNumbersForm = () => {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(numbersSchema),
+    mode: "onChange",
   });
 
   const watchedValues = watch();
