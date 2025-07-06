@@ -8,12 +8,14 @@ test("should load the number input demo page", async ({ page }) => {
 
   // Check that the main heading is present
   await expect(
-    page.getByRole("heading", { name: "React Hook Form + Zod Validation" }),
+    page.getByRole("heading", {
+      name: "React Hook Form + Zod: Value Transformation Approaches",
+    }),
   ).toBeVisible();
 
   // Check section heading
   await expect(
-    page.getByRole("heading", { name: "Value Transformation Methods" }),
+    page.getByRole("heading", { name: "Compare Approaches:" }),
   ).toBeVisible();
 
   // Check form elements using role attributes
@@ -65,9 +67,7 @@ test("should load the number input demo page", async ({ page }) => {
   await numberInputPreprocess.clear();
 
   // Test watched value display section
-  await expect(
-    page.getByRole("region", { name: "Current watched values" }),
-  ).toBeVisible();
+  await expect(page.getByText("Watched values:")).toBeVisible();
 
   // Test watched value display with numbers
   await numberInput.fill("25");
@@ -75,9 +75,7 @@ test("should load the number input demo page", async ({ page }) => {
 
   // Test form submission
   await submitButton.click();
-  await expect(
-    page.getByRole("region", { name: "Last submitted values" }),
-  ).toBeVisible();
+  await expect(page.getByText("Last submitted values:")).toBeVisible();
 
   // Test submitting empty values
   await numberInput.clear();

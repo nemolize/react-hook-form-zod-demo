@@ -1,4 +1,3 @@
-import { twMerge } from "tailwind-merge";
 import { useNumbersForm } from "./hooks/useNumbersForm";
 
 const App = () => {
@@ -6,30 +5,19 @@ const App = () => {
     useNumbersForm();
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <main className="bg-white p-8 rounded-lg shadow-lg">
-        <header>
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            React Hook Form + Zod Validation
-          </h1>
-          <p className="text-gray-600 mb-6">
-            Compare value transformation & validation approaches
-          </p>
-        </header>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <section
-            className="space-y-4"
-            aria-label="Value Transformation Methods"
-          >
-            <h2 className="text-lg font-semibold text-gray-700">
-              Value Transformation Methods
-            </h2>
+    <div className="p-8 max-w-2xl mx-auto">
+      <h1 className="text-2xl font-bold mb-6">
+        React Hook Form + Zod: Value Transformation Approaches
+      </h1>
 
-            <fieldset aria-label="setValueAs approach">
-              <label className="block">
-                <span className="block text-sm font-medium text-gray-700 mb-1">
-                  setValueAs approach
-                </span>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <h2 className="text-lg font-semibold mb-4">Compare Approaches:</h2>
+
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                1. setValueAs approach
                 <input
                   type="number"
                   {...register("withSetValueAs", {
@@ -39,86 +27,63 @@ const App = () => {
                       return Number.isNaN(num) ? null : num;
                     },
                   })}
-                  className={twMerge(
-                    "w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none",
-                    errors.withSetValueAs
-                      ? "border-red-500 focus:border-red-500 focus:ring-4 focus:ring-red-200"
-                      : "border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500",
-                  )}
+                  className={`w-full px-3 py-2 border rounded ${
+                    errors.withSetValueAs ? "border-red-500" : "border-gray-300"
+                  }`}
                   placeholder="Enter a number (0-100)"
                 />
               </label>
               {errors.withSetValueAs && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className="text-sm text-red-600 mt-1">
                   {errors.withSetValueAs.message}
                 </p>
               )}
-            </fieldset>
+            </div>
 
-            <fieldset aria-label="z.preprocess approach">
-              <label className="block">
-                <span className="block text-sm font-medium text-gray-700 mb-1">
-                  z.preprocess approach
-                </span>
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                2. z.preprocess approach
                 <input
                   type="number"
                   {...register("withPreprocess")}
-                  className={twMerge(
-                    "w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none",
-                    errors.withPreprocess
-                      ? "border-red-500 focus:border-red-500 focus:ring-4 focus:ring-red-200"
-                      : "border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500",
-                  )}
+                  className={`w-full px-3 py-2 border rounded ${
+                    errors.withPreprocess ? "border-red-500" : "border-gray-300"
+                  }`}
                   placeholder="Enter a number (0-100)"
                 />
               </label>
               {errors.withPreprocess && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className="text-sm text-red-600 mt-1">
                   {errors.withPreprocess.message}
                 </p>
               )}
-            </fieldset>
-          </section>
+            </div>
+          </div>
+        </div>
 
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
-          >
-            Submit
-          </button>
-        </form>
-
-        <section
-          className="mt-6 space-y-3 border-t pt-4"
-          aria-label="Form Data Display"
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
         >
-          <section
-            className="text-sm text-gray-600"
-            aria-label="Current watched values"
-          >
-            <span className="font-medium">Current watched values:</span>{" "}
-            <pre
-              className="font-mono text-blue-600 bg-gray-200 p-4 rounded"
-              role="log"
-              aria-live="polite"
-            >
-              {JSON.stringify(watchedValues, null, 2)}
-            </pre>
-          </section>
-          <section
-            className="text-sm text-gray-600"
-            aria-label="Last submitted values"
-          >
-            <span className="font-medium">Last submitted values:</span>{" "}
-            <pre
-              className="font-mono text-green-600 bg-gray-200 p-4 rounded"
-              role="log"
-            >
-              {JSON.stringify(submittedValues, null, 2)}
-            </pre>
-          </section>
-        </section>
-      </main>
+          Submit
+        </button>
+      </form>
+
+      <div className="mt-8 space-y-4">
+        <div>
+          <h3 className="font-medium">Watched values:</h3>
+          <pre className="bg-gray-100 p-3 rounded text-sm overflow-auto">
+            {JSON.stringify(watchedValues, null, 2)}
+          </pre>
+        </div>
+
+        <div>
+          <h3 className="font-medium">Last submitted values:</h3>
+          <pre className="bg-gray-100 p-3 rounded text-sm overflow-auto">
+            {JSON.stringify(submittedValues, null, 2)}
+          </pre>
+        </div>
+      </div>
     </div>
   );
 };
