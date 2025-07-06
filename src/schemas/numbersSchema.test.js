@@ -20,7 +20,7 @@ describe("numbersSchema", () => {
     it("should accept boundary values (0 and 100)", () => {
       const minBoundary = { withSetValueAs: 0, withPreprocess: 0 };
       const maxBoundary = { withSetValueAs: 100, withPreprocess: 100 };
-      
+
       expect(numbersSchema.safeParse(minBoundary).success).toBe(true);
       expect(numbersSchema.safeParse(maxBoundary).success).toBe(true);
     });
@@ -29,18 +29,25 @@ describe("numbersSchema", () => {
       const invalidData = { withSetValueAs: -1, withPreprocess: 50 };
       const result = numbersSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
-      expect(result.error.issues[0].message).toContain("Number must be greater than or equal to 0");
+      expect(result.error.issues[0].message).toContain(
+        "Number must be greater than or equal to 0",
+      );
     });
 
     it("should reject numbers above 100", () => {
       const invalidData = { withSetValueAs: 101, withPreprocess: 50 };
       const result = numbersSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
-      expect(result.error.issues[0].message).toContain("Number must be less than or equal to 100");
+      expect(result.error.issues[0].message).toContain(
+        "Number must be less than or equal to 100",
+      );
     });
 
     it("should reject non-number values", () => {
-      const invalidData = { withSetValueAs: "not a number", withPreprocess: 50 };
+      const invalidData = {
+        withSetValueAs: "not a number",
+        withPreprocess: 50,
+      };
       const result = numbersSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
     });
@@ -82,7 +89,10 @@ describe("numbersSchema", () => {
     });
 
     it("should preprocess invalid strings to null and accept it", () => {
-      const invalidStringData = { withSetValueAs: 50, withPreprocess: "not a number" };
+      const invalidStringData = {
+        withSetValueAs: 50,
+        withPreprocess: "not a number",
+      };
       const result = numbersSchema.safeParse(invalidStringData);
       expect(result.success).toBe(true);
       expect(result.data).toEqual({ withSetValueAs: 50, withPreprocess: null });
@@ -92,14 +102,18 @@ describe("numbersSchema", () => {
       const negativeStringData = { withSetValueAs: 50, withPreprocess: "-1" };
       const result = numbersSchema.safeParse(negativeStringData);
       expect(result.success).toBe(false);
-      expect(result.error.issues[0].message).toContain("Number must be greater than or equal to 0");
+      expect(result.error.issues[0].message).toContain(
+        "Number must be greater than or equal to 0",
+      );
     });
 
     it("should reject preprocessed numbers above 100", () => {
       const largeStringData = { withSetValueAs: 50, withPreprocess: "101" };
       const result = numbersSchema.safeParse(largeStringData);
       expect(result.success).toBe(false);
-      expect(result.error.issues[0].message).toContain("Number must be less than or equal to 100");
+      expect(result.error.issues[0].message).toContain(
+        "Number must be less than or equal to 100",
+      );
     });
 
     it("should handle numeric string with whitespace", () => {
@@ -119,7 +133,11 @@ describe("numbersSchema", () => {
     });
 
     it("should allow extra fields (Zod default behavior)", () => {
-      const extraField = { withSetValueAs: 50, withPreprocess: 75, extra: "field" };
+      const extraField = {
+        withSetValueAs: 50,
+        withPreprocess: 75,
+        extra: "field",
+      };
       const result = numbersSchema.safeParse(extraField);
       expect(result.success).toBe(true);
       expect(result.data).toEqual({ withSetValueAs: 50, withPreprocess: 75 });
