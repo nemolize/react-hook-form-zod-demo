@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const numberSchema = z.object({
-  numberInput: z.number().min(0).max(100),
+  numberInput: z.union([z.number().min(0).max(100), z.null()]),
 });
 
 type NumberFormData = z.infer<typeof numberSchema>;
@@ -45,7 +45,13 @@ const App = () => {
             <input
               id="numberInput"
               type="number"
-              {...register("numberInput", { valueAsNumber: true })}
+              {...register("numberInput", {
+                setValueAs: (value) => {
+                  if (value === "" || value === undefined) return null;
+                  const num = Number(value);
+                  return Number.isNaN(num) ? null : num;
+                },
+              })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter a number"
             />

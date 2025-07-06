@@ -48,17 +48,26 @@ test("should load the number input demo page", async ({ page }) => {
   // Test empty submission
   await numberInput.clear();
   await submitButton.click();
-  // Empty number input will show default Zod error
-  await expect(page.getByText("Expected number, received nan")).toBeVisible();
+  // Empty number input will be converted to null and pass validation
+  await expect(
+    page.getByText("Expected number, received nan"),
+  ).not.toBeVisible();
 
-  // Test watched value display
-  await numberInput.clear();
-  await numberInput.fill("25");
+  // Test watched value display with empty input (should show null)
   await expect(page.getByText("Current value (watched):")).toBeVisible();
+  await expect(page.getByText("null").first()).toBeVisible();
+
+  // Test watched value display with number
+  await numberInput.fill("25");
   await expect(page.getByText("25")).toBeVisible();
 
   // Test submitted value display
   await submitButton.click();
   await expect(page.getByText("Last submitted value:")).toBeVisible();
   await expect(page.getByText("25").nth(1)).toBeVisible();
+
+  // Test submitting empty value (should show null)
+  await numberInput.clear();
+  await submitButton.click();
+  await expect(page.getByText("null").nth(1)).toBeVisible();
 });
