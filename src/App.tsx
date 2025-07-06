@@ -25,7 +25,7 @@ const App = () => {
               Value Transformation Methods
             </h2>
 
-            <div role="group" aria-label="setValueAs approach">
+            <fieldset aria-label="setValueAs approach">
               <label className="block">
                 <span className="block text-sm font-medium text-gray-700 mb-1">
                   setValueAs approach
@@ -53,9 +53,9 @@ const App = () => {
                   {errors.withSetValueAs.message}
                 </p>
               )}
-            </div>
+            </fieldset>
 
-            <div role="group" aria-label="z.preprocess approach">
+            <fieldset aria-label="z.preprocess approach">
               <label className="block">
                 <span className="block text-sm font-medium text-gray-700 mb-1">
                   z.preprocess approach
@@ -77,7 +77,7 @@ const App = () => {
                   {errors.withPreprocess.message}
                 </p>
               )}
-            </div>
+            </fieldset>
           </section>
 
           <button
@@ -92,9 +92,8 @@ const App = () => {
           className="mt-6 space-y-3 border-t pt-4"
           aria-label="Form Data Display"
         >
-          <div
+          <section
             className="text-sm text-gray-600"
-            role="region"
             aria-label="Current watched values"
           >
             <span className="font-medium">Current watched values:</span>{" "}
@@ -105,10 +104,9 @@ const App = () => {
             >
               {JSON.stringify(watchedValues, null, 2)}
             </pre>
-          </div>
-          <div
+          </section>
+          <section
             className="text-sm text-gray-600"
-            role="region"
             aria-label="Last submitted values"
           >
             <span className="font-medium">Last submitted values:</span>{" "}
@@ -118,7 +116,7 @@ const App = () => {
             >
               {JSON.stringify(submittedValues, null, 2)}
             </pre>
-          </div>
+          </section>
         </section>
       </main>
     </div>
