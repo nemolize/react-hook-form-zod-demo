@@ -67,7 +67,7 @@ const App = () => {
                     "w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none",
                     errors.withPreprocess
                       ? "border-red-500 focus:border-red-500 focus:ring-4 focus:ring-red-200"
-                      : "border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-500",
+                      : "border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500",
                   )}
                   placeholder="Enter a number (0-100)"
                 />
