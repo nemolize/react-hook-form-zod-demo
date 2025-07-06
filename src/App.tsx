@@ -1,45 +1,13 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-
-const preprocessNumber = z.preprocess(
-  (val) => {
-    if (val === "" || val === null || val === undefined) return null;
-    const num = Number(val);
-    return Number.isNaN(num) ? null : num;
-  },
-  z.union([z.number().min(0).max(100), z.null()]),
-);
-
-const numberSchema = z.object({
-  numberInput: z.union([z.number().min(0).max(100), z.null()]),
-  numberInputPreprocess: preprocessNumber,
-});
-
-type NumberFormData = z.infer<typeof numberSchema>;
+import { useNumberInputsForm } from "./hooks/useNumberInputsForm";
 
 const App = () => {
-  const [submittedValue, setSubmittedValue] = useState<NumberFormData | null>(
-    null,
-  );
-
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(numberSchema),
-  });
-
-  const watchedValue = watch("numberInput");
-  const watchedValuePreprocess = watch("numberInputPreprocess");
-
-  const onSubmit = (data: unknown) => {
-    console.log("Form submitted with:", data);
-    setSubmittedValue(data as NumberFormData);
-  };
+    errors,
+    watchedValues,
+    submittedValues,
+  } = useNumberInputsForm();
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -47,18 +15,18 @@ const App = () => {
         <h1 className="text-4xl font-bold text-gray-800 mb-6">
           Number Input Demo
         </h1>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label
-              htmlFor="numberInput"
+              htmlFor="withSetValueAs"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
               Enter a number (0-100) - setValueAs approach
             </label>
             <input
-              id="numberInput"
+              id="withSetValueAs"
               type="number"
-              {...register("numberInput", {
+              {...register("withSetValueAs", {
                 setValueAs: (value) => {
                   if (value === "" || value === undefined) return null;
                   const num = Number(value);
@@ -68,30 +36,30 @@ const App = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter a number"
             />
-            {errors.numberInput && (
+            {errors.withSetValueAs && (
               <p className="mt-1 text-sm text-red-600">
-                {errors.numberInput.message}
+                {errors.withSetValueAs.message}
               </p>
             )}
           </div>
 
           <div>
             <label
-              htmlFor="numberInputPreprocess"
+              htmlFor="withPreprocess"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
               Enter a number (0-100) - z.preprocess approach
             </label>
             <input
-              id="numberInputPreprocess"
+              id="withPreprocess"
               type="number"
-              {...register("numberInputPreprocess")}
+              {...register("withPreprocess")}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
               placeholder="Enter a number"
             />
-            {errors.numberInputPreprocess && (
+            {errors.withPreprocess && (
               <p className="mt-1 text-sm text-red-600">
-                {errors.numberInputPreprocess.message}
+                {errors.withPreprocess.message}
               </p>
             )}
           </div>
@@ -105,21 +73,15 @@ const App = () => {
 
         <div className="mt-6 space-y-3 border-t pt-4">
           <div className="text-sm text-gray-600">
-            <span className="font-medium">setValueAs input (watched):</span>{" "}
-            <span className="font-mono text-blue-600">
-              {JSON.stringify(watchedValue)}
-            </span>
-          </div>
-          <div className="text-sm text-gray-600">
-            <span className="font-medium">z.preprocess input (watched):</span>{" "}
-            <span className="font-mono text-purple-600">
-              {JSON.stringify(watchedValuePreprocess)}
-            </span>
+            <span className="font-medium">Current watched values:</span>{" "}
+            <pre className="font-mono text-blue-600">
+              {JSON.stringify(watchedValues, null, 2)}
+            </pre>
           </div>
           <div className="text-sm text-gray-600">
             <span className="font-medium">Last submitted values:</span>{" "}
             <pre className="font-mono text-green-600">
-              {JSON.stringify(submittedValue, null, 2)}
+              {JSON.stringify(submittedValues, null, 2)}
             </pre>
           </div>
         </div>
