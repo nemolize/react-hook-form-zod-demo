@@ -5,7 +5,7 @@ const App = () => {
     useNumbersForm();
 
   return (
-    <div className="p-8 max-w-2xl mx-auto">
+    <div className="p-8 max-w-2xl mx-auto shadow-lg">
       <h1 className="text-2xl font-bold mb-6">
         React Hook Form + Zod: Value Transformation Approaches
       </h1>
@@ -17,7 +17,7 @@ const App = () => {
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium mb-1">
-                1. setValueAs approach
+                1. setValueAs approach ("withSetValueAs" field)
                 <input
                   type="number"
                   {...register("withSetValueAs", {
@@ -42,7 +42,7 @@ const App = () => {
 
             <div>
               <label className="block text-sm font-medium mb-1">
-                2. z.preprocess approach
+                2. z.preprocess approach ("withPreprocess" field)
                 <input
                   type="number"
                   {...register("withPreprocess")}
