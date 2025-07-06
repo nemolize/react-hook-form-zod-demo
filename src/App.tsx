@@ -1,3 +1,4 @@
+import { twMerge } from "tailwind-merge";
 import { useNumbersForm } from "./hooks/useNumbersForm";
 
 const App = () => {
@@ -28,7 +29,12 @@ const App = () => {
                   return Number.isNaN(num) ? null : num;
                 },
               })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className={twMerge(
+                "w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none",
+                errors.withSetValueAs
+                  ? "border-red-500 focus:border-red-500 focus:ring-4 focus:ring-red-200"
+                  : "border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+              )}
               placeholder="Enter a number"
             />
             {errors.withSetValueAs && (
@@ -49,7 +55,12 @@ const App = () => {
               id="withPreprocess"
               type="number"
               {...register("withPreprocess")}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+              className={twMerge(
+                "w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none",
+                errors.withPreprocess
+                  ? "border-red-500 focus:border-red-500 focus:ring-4 focus:ring-red-200"
+                  : "border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-500"
+              )}
               placeholder="Enter a number"
             />
             {errors.withPreprocess && (
