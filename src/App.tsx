@@ -3,29 +3,42 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+const preprocessNumber = z.preprocess(
+  (val) => {
+    if (val === "" || val === null || val === undefined) return null;
+    const num = Number(val);
+    return Number.isNaN(num) ? null : num;
+  },
+  z.union([z.number().min(0).max(100), z.null()]),
+);
+
 const numberSchema = z.object({
   numberInput: z.union([z.number().min(0).max(100), z.null()]),
+  numberInputPreprocess: preprocessNumber,
 });
 
 type NumberFormData = z.infer<typeof numberSchema>;
 
 const App = () => {
-  const [submittedValue, setSubmittedValue] = useState<number | null>(null);
+  const [submittedValue, setSubmittedValue] = useState<NumberFormData | null>(
+    null,
+  );
 
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<NumberFormData>({
+  } = useForm({
     resolver: zodResolver(numberSchema),
   });
 
   const watchedValue = watch("numberInput");
+  const watchedValuePreprocess = watch("numberInputPreprocess");
 
-  const onSubmit = (data: NumberFormData) => {
+  const onSubmit = (data: unknown) => {
     console.log("Form submitted with:", data);
-    setSubmittedValue(data.numberInput);
+    setSubmittedValue(data as NumberFormData);
   };
 
   return (
@@ -40,7 +53,7 @@ const App = () => {
               htmlFor="numberInput"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              Enter a number (0-100)
+              Enter a number (0-100) - setValueAs approach
             </label>
             <input
               id="numberInput"
@@ -61,6 +74,27 @@ const App = () => {
               </p>
             )}
           </div>
+
+          <div>
+            <label
+              htmlFor="numberInputPreprocess"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Enter a number (0-100) - z.preprocess approach
+            </label>
+            <input
+              id="numberInputPreprocess"
+              type="number"
+              {...register("numberInputPreprocess")}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+              placeholder="Enter a number"
+            />
+            {errors.numberInputPreprocess && (
+              <p className="mt-1 text-sm text-red-600">
+                {errors.numberInputPreprocess.message}
+              </p>
+            )}
+          </div>
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
@@ -69,18 +103,24 @@ const App = () => {
           </button>
         </form>
 
-        <div className="mt-6 space-y-2 border-t pt-4">
+        <div className="mt-6 space-y-3 border-t pt-4">
           <div className="text-sm text-gray-600">
-            <span className="font-medium">Current value (watched):</span>{" "}
+            <span className="font-medium">setValueAs input (watched):</span>{" "}
             <span className="font-mono text-blue-600">
               {JSON.stringify(watchedValue)}
             </span>
           </div>
           <div className="text-sm text-gray-600">
-            <span className="font-medium">Last submitted value:</span>{" "}
-            <span className="font-mono text-green-600">
-              {JSON.stringify(submittedValue)}
+            <span className="font-medium">z.preprocess input (watched):</span>{" "}
+            <span className="font-mono text-purple-600">
+              {JSON.stringify(watchedValuePreprocess)}
             </span>
+          </div>
+          <div className="text-sm text-gray-600">
+            <span className="font-medium">Last submitted values:</span>{" "}
+            <pre className="font-mono text-green-600">
+              {JSON.stringify(submittedValue, null, 2)}
+            </pre>
           </div>
         </div>
       </div>
