@@ -1,9 +1,9 @@
 import { act, renderHook } from "@testing-library/react";
-import { useNumberInputsForm } from "./useNumberInputsForm";
+import { useNumbersForm } from "./useNumbersForm";
 
-describe("useNumberInputsForm", () => {
+describe("useNumbersForm", () => {
   it("should initialize with default values", () => {
-    const { result } = renderHook(() => useNumberInputsForm());
+    const { result } = renderHook(() => useNumbersForm());
 
     expect(result.current.submittedValues).toBeNull();
     expect(result.current.watchedValues).toEqual({});
@@ -13,7 +13,7 @@ describe("useNumberInputsForm", () => {
   });
 
   it("should register form fields correctly", () => {
-    const { result } = renderHook(() => useNumberInputsForm());
+    const { result } = renderHook(() => useNumbersForm());
 
     const withSetValueAsField = result.current.register("withSetValueAs", {
       setValueAs: (value) => {
@@ -37,7 +37,7 @@ describe("useNumberInputsForm", () => {
   });
 
   it("should handle form submission with valid data", async () => {
-    const { result } = renderHook(() => useNumberInputsForm());
+    const { result } = renderHook(() => useNumbersForm());
     const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
 
     const mockEvent = {
@@ -55,7 +55,7 @@ describe("useNumberInputsForm", () => {
   });
 
   it("should validate number range (0-100)", () => {
-    const { result } = renderHook(() => useNumberInputsForm());
+    const { result } = renderHook(() => useNumbersForm());
 
     // Test validation schema directly
     const schema = result.current.register("withSetValueAs").name;
@@ -66,7 +66,7 @@ describe("useNumberInputsForm", () => {
   });
 
   it("should handle null values correctly", () => {
-    const { result } = renderHook(() => useNumberInputsForm());
+    const { result } = renderHook(() => useNumbersForm());
 
     // The hook should be able to handle null values for both fields
     expect(result.current.watchedValues).toEqual({});
@@ -74,7 +74,7 @@ describe("useNumberInputsForm", () => {
   });
 
   it("should update watched values when form changes", () => {
-    const { result } = renderHook(() => useNumberInputsForm());
+    const { result } = renderHook(() => useNumbersForm());
 
     // Initial watched values should be empty
     expect(result.current.watchedValues).toEqual({});
@@ -115,7 +115,7 @@ describe("useNumberInputsForm", () => {
   });
 
   it("should maintain form state consistency", () => {
-    const { result } = renderHook(() => useNumberInputsForm());
+    const { result } = renderHook(() => useNumbersForm());
 
     // The hook should maintain consistent state structure
     expect(result.current).toHaveProperty("register");

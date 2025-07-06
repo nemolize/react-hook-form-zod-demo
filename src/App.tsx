@@ -1,13 +1,8 @@
-import { useNumberInputsForm } from "./hooks/useNumberInputsForm";
+import { useNumbersForm } from "./hooks/useNumbersForm";
 
 const App = () => {
-  const {
-    register,
-    handleSubmit,
-    errors,
-    watchedValues,
-    submittedValues,
-  } = useNumberInputsForm();
+  const { register, handleSubmit, errors, watchedValues, submittedValues } =
+    useNumbersForm();
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">

@@ -1,23 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { type NumberFormData, numbersSchema } from "../schemas/numbersSchema";
 
-const numberSchema = z.object({
-  withSetValueAs: z.union([z.number().min(0).max(100), z.null()]),
-  withPreprocess: z.preprocess(
-    (val) => {
-      if (val === "" || val === null || val === undefined) return null;
-      const num = Number(val);
-      return Number.isNaN(num) ? null : num;
-    },
-    z.union([z.number().min(0).max(100), z.null()]),
-  ),
-});
-
-type NumberFormData = z.infer<typeof numberSchema>;
-
-export const useNumberInputsForm = () => {
+export const useNumbersForm = () => {
   const [submittedValues, setSubmittedValues] = useState<NumberFormData | null>(
     null,
   );
@@ -28,7 +14,7 @@ export const useNumberInputsForm = () => {
     watch,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(numberSchema),
+    resolver: zodResolver(numbersSchema),
   });
 
   const watchedValues = watch();
@@ -46,5 +32,3 @@ export const useNumberInputsForm = () => {
     submittedValues,
   };
 };
-
-export type { NumberFormData };
