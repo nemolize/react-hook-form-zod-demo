@@ -1,15 +1,22 @@
-# Web App Template
+# React Hook Form Zod Demo
 
-A modern web application template built with React, TypeScript, and Vite.
+A demo application showcasing React Hook Form integration with Zod validation for number inputs. This demo focuses on specific edge cases and patterns you might encounter in real-world applications.
 
 ## Features
 
-- **React** with TypeScript
+- **React Hook Form** for form state management
+- **Zod** for schema validation with nullable() patterns
+- **TypeScript** for type safety
 - **Vite** for fast development and building
 - **Biome** for linting and formatting
 - **Vitest** for unit testing with Testing Library
 - **Playwright** for end-to-end testing
-- **Renovate** for automated dependency updates
+- **Tailwind CSS** for styling
+
+## Demo Components
+
+- Number input with `setValueAs` transformation
+- Number input with `preprocess` validation
 
 ## Getting Started
 
