@@ -67,13 +67,13 @@ const App = () => {
           <div className="text-sm text-gray-600">
             <span className="font-medium">Current value (watched):</span>{" "}
             <span className="font-mono text-blue-600">
-              {watchedValue !== undefined ? JSON.stringify(watchedValue) : "undefined"}
+              {JSON.stringify(watchedValue)}
             </span>
           </div>
           <div className="text-sm text-gray-600">
             <span className="font-medium">Last submitted value:</span>{" "}
             <span className="font-mono text-green-600">
-              {submittedValue !== null ? submittedValue : "none"}
+              {JSON.stringify(submittedValue)}
             </span>
           </div>
         </div>
