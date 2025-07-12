@@ -4,7 +4,7 @@ test("should load the number input demo page", async ({ page }) => {
   await page.goto("/");
 
   // Check page title
-  await expect(page).toHaveTitle("Web App Template");
+  await expect(page).toHaveTitle("React Hook Form Zod Demo");
 
   // Check that the main heading is present
   await expect(
