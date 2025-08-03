@@ -11,9 +11,9 @@ export const useNumbersForm = () => {
 
   const {
     register,
-    handleSubmit,
     watch,
     formState: { errors },
+    ...form
   } = useForm({
     resolver: zodResolver(numbersSchema),
     mode: "onChange",
@@ -21,14 +21,14 @@ export const useNumbersForm = () => {
 
   const watchedValues = watch();
 
-  const onSubmit = (data: unknown) => {
+  const handleSubmit = form.handleSubmit((data) => {
     console.log("Form submitted with:", data);
-    setSubmittedValues(data as NumberFormData);
-  };
+    setSubmittedValues(data);
+  });
 
   return {
     register,
-    handleSubmit: handleSubmit(onSubmit),
+    handleSubmit,
     errors,
     watchedValues,
     submittedValues,
