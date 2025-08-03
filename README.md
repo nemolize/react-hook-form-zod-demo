@@ -8,7 +8,7 @@ A demo application showcasing React Hook Form integration with Zod validation fo
 - **Zod** for schema validation with nullable() patterns
 - **TypeScript** for type safety
 - **Vite** for fast development and building
-- **Biome** for linting and formatting
+- **ESLint** and **Prettier** for linting and formatting
 - **Vitest** for unit testing with Testing Library
 - **Playwright** for end-to-end testing
 - **Tailwind CSS** for styling
@@ -78,13 +78,7 @@ pnpm lint
 Fix code style issues:
 
 ```bash
-pnpm lint:fix
-```
-
-Run type checking:
-
-```bash
-pnpm typecheck
+pnpm fix
 ```
 
 ## License
