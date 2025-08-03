@@ -5,18 +5,18 @@ const App = () => {
     useNumbersForm();
 
   return (
-    <div className="p-8 max-w-2xl mx-auto shadow-lg">
-      <h1 className="text-2xl font-bold mb-6">
+    <div className="mx-auto max-w-2xl p-8 shadow-lg">
+      <h1 className="mb-6 text-2xl font-bold">
         React Hook Form + Zod: Value Transformation Approaches
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <h2 className="text-lg font-semibold mb-4">Compare Approaches:</h2>
+          <h2 className="mb-4 text-lg font-semibold">Compare Approaches:</h2>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">
+              <label className="mb-1 block text-sm font-medium">
                 1. setValueAs approach ("withSetValueAs" field)
                 <input
                   type="number"
@@ -27,33 +27,33 @@ const App = () => {
                       return Number.isNaN(num) ? null : num;
                     },
                   })}
-                  className={`w-full px-3 py-2 border rounded ${
+                  className={`w-full rounded border px-3 py-2 ${
                     errors.withSetValueAs ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="Enter a number (0-100)"
                 />
               </label>
               {errors.withSetValueAs && (
-                <p className="text-sm text-red-600 mt-1">
+                <p className="mt-1 text-sm text-red-600">
                   {errors.withSetValueAs.message}
                 </p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">
+              <label className="mb-1 block text-sm font-medium">
                 2. z.preprocess approach ("withPreprocess" field)
                 <input
                   type="number"
                   {...register("withPreprocess")}
-                  className={`w-full px-3 py-2 border rounded ${
+                  className={`w-full rounded border px-3 py-2 ${
                     errors.withPreprocess ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="Enter a number (0-100)"
                 />
               </label>
               {errors.withPreprocess && (
-                <p className="text-sm text-red-600 mt-1">
+                <p className="mt-1 text-sm text-red-600">
                   {errors.withPreprocess.message}
                 </p>
               )}
@@ -63,7 +63,7 @@ const App = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+          className="w-full rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
         >
           Submit
         </button>
@@ -72,14 +72,14 @@ const App = () => {
       <div className="mt-8 space-y-4">
         <div>
           <h3 className="font-medium">Watched values:</h3>
-          <pre className="bg-gray-100 p-3 rounded text-sm overflow-auto">
+          <pre className="overflow-auto rounded bg-gray-100 p-3 text-sm">
             {JSON.stringify(watchedValues, null, 2)}
           </pre>
         </div>
 
         <div>
           <h3 className="font-medium">Last submitted values:</h3>
-          <pre className="bg-gray-100 p-3 rounded text-sm overflow-auto">
+          <pre className="overflow-auto rounded bg-gray-100 p-3 text-sm">
             {JSON.stringify(submittedValues, null, 2)}
           </pre>
         </div>
