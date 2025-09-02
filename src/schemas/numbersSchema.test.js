@@ -31,7 +31,7 @@ describe("numbersSchema", () => {
       const result = numbersSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       expect(result.error.issues[0].message).toContain(
-        "Number must be greater than or equal to 0",
+        "Too small: expected number to be >=0",
       );
     });
 
@@ -40,7 +40,7 @@ describe("numbersSchema", () => {
       const result = numbersSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       expect(result.error.issues[0].message).toContain(
-        "Number must be less than or equal to 100",
+        "Too big: expected number to be <=100",
       );
     });
 
@@ -104,7 +104,7 @@ describe("numbersSchema", () => {
       const result = numbersSchema.safeParse(negativeStringData);
       expect(result.success).toBe(false);
       expect(result.error.issues[0].message).toContain(
-        "Number must be greater than or equal to 0",
+        "Too small: expected number to be >=0",
       );
     });
 
@@ -113,7 +113,7 @@ describe("numbersSchema", () => {
       const result = numbersSchema.safeParse(largeStringData);
       expect(result.success).toBe(false);
       expect(result.error.issues[0].message).toContain(
-        "Number must be less than or equal to 100",
+        "Too big: expected number to be <=100",
       );
     });
 

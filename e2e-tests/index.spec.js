@@ -33,33 +33,33 @@ test("should load the number input demo page", async ({ page }) => {
   // Test input validation for setValueAs approach
   await numberInput.fill("101"); // Over the limit
   await expect(
-    page.getByText("Number must be less than or equal to 100"),
+    page.getByText("Too big: expected number to be <=100"),
   ).toBeVisible();
 
   await numberInput.fill("-1"); // Under the limit
   await expect(
-    page.getByText("Number must be greater than or equal to 0"),
+    page.getByText("Too small: expected number to be >=0"),
   ).toBeVisible();
 
   await numberInput.fill("50"); // Valid number
   await expect(
-    page.getByText("Number must be greater than or equal to 0"),
+    page.getByText("Too small: expected number to be >=0"),
   ).not.toBeVisible();
 
   // Test input validation for z.preprocess approach
   await numberInputPreprocess.fill("101"); // Over the limit
   await expect(
-    page.getByText("Number must be less than or equal to 100"),
+    page.getByText("Too big: expected number to be <=100"),
   ).toBeVisible();
 
   await numberInputPreprocess.fill("-1"); // Under the limit
   await expect(
-    page.getByText("Number must be greater than or equal to 0"),
+    page.getByText("Too small: expected number to be >=0"),
   ).toBeVisible();
 
   await numberInputPreprocess.fill("50"); // Valid number
   await expect(
-    page.getByText("Number must be greater than or equal to 0"),
+    page.getByText("Too small: expected number to be >=0"),
   ).not.toBeVisible();
 
   // Clear inputs to test empty state
