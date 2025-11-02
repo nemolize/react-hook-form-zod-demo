@@ -13,7 +13,7 @@ importers:
         version: 5.2.2(react-hook-form@7.66.0(react@19.2.0))
       '@react-hookz/web':
         specifier: ^25.1.1
-        version: 25.1.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        version: 25.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react:
         specifier: ^19.1.1
         version: 19.2.0
@@ -510,8 +510,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@react-hookz/web@25.1.1':
-    resolution: {integrity: sha512-o1BA+5Z8PCuAnxF7+2TZI+xGBtzyLw8z/flD8AMeJXILYTM8HkI0g41oM7IW/qjUDKx30HKceQQpCKqFGj+iIw==}
+  '@react-hookz/web@25.2.0':
+    resolution: {integrity: sha512-60iU7lGnZOjdkNVpu/8xNEnTPVQQ5ckauIEvsh9S+58v2j/mY1lhgNas+w+9UF8VoUhWC4/cpaxT64EUC6DgsQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       js-cookie: ^3.0.5
@@ -2344,7 +2344,7 @@ snapshots:
     dependencies:
       playwright: 1.56.1
 
-  '@react-hookz/web@25.1.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+  '@react-hookz/web@25.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@ver0/deep-equal': 1.0.0
       react: 19.2.0
