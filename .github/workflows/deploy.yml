@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: ./.github/actions/setup
+      - uses: nemolize/actions/setup@ffbe3737f01cb4e563dd19424761da8c3c9a9173 # v1.2.0
       - uses: actions/configure-pages@v5
       - run: pnpm build --base=/${{ github.event.repository.name }}/
       - uses: actions/upload-pages-artifact@v4
