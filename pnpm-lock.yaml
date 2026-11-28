@@ -13,7 +13,7 @@ importers:
         version: 5.9.2(@standard-schema/spec@1.1.0)(react-hook-form@7.92.0(@types/react@19.3.1)(react@19.3.1))(zod@4.6.7)
       '@react-hookz/web':
         specifier: ^25.1.1
-        version: 25.2.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        version: 25.3.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       react:
         specifier: ^19.1.1
         version: 19.3.1
@@ -642,8 +642,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@react-hookz/web@25.2.0':
-    resolution: {integrity: sha512-60iU7lGnZOjdkNVpu/8xNEnTPVQQ5ckauIEvsh9S+58v2j/mY1lhgNas+w+9UF8VoUhWC4/cpaxT64EUC6DgsQ==}
+  '@react-hookz/web@25.3.0':
+    resolution: {integrity: sha512-aZXe1p7yn3AUzvP13P8mhR25hpYLJU9QhOMeUcVUx4krd0cdTI/g/ogJmVGvu93u+ST13SISC8/KaFPiodhVUw==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       js-cookie: ^3.0.5
@@ -1002,9 +1002,9 @@ packages:
     resolution: {integrity: sha512-T0XJMaRPOH3+LBbAfzR2jalckP1MSG/L9eUtY0DEzUyVaXJ/t6zN0nR7co5kz0Jko/nkSYCBRkz1djvjajVTTg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@ver0/deep-equal@1.0.0':
-    resolution: {integrity: sha512-XKIlF1i6UJiyTL52mDrSDDgRX7Qr5yJ7ts9zn2liZEmhiAEum4XKrJRAWmHdFwCQeGBU+rb+/b0ldw/9V8lOWw==}
-    engines: {node: '>=18'}
+  '@ver0/deep-equal@2.1.2':
+    resolution: {integrity: sha512-OIMaw1X0wPIwFa5l8Kfbdr5+RJ/S5aGu4UZjRgoSYqRXix2Ah5p4IDrXUreg5DCQA/NiCQ9hULDuTDrk0bzm0A==}
+    engines: {node: '>=20'}
 
   '@vitejs/plugin-react@5.1.1':
     resolution: {integrity: sha512-WQfkSw0QbQ5aJ2CHYw23ZGkqnRwqKHD/KYsMeTkZzPT4Jcf0DcBxBtwMJxnu6E7oxw5+JC6ZAiePgh28uJ1HBA==}
@@ -2599,9 +2599,9 @@ snapshots:
     dependencies:
       playwright: 1.56.1
 
-  '@react-hookz/web@25.2.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
+  '@react-hookz/web@25.3.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
     dependencies:
-      '@ver0/deep-equal': 1.0.0
+      '@ver0/deep-equal': 2.1.2
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
 
@@ -2925,7 +2925,7 @@ snapshots:
       '@typescript-eslint/types': 8.48.0
       eslint-visitor-keys: 4.2.1
 
-  '@ver0/deep-equal@1.0.0': {}
+  '@ver0/deep-equal@2.1.2': {}
 
   '@vitejs/plugin-react@5.1.1(vite@7.3.8(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2))':
     dependencies:
