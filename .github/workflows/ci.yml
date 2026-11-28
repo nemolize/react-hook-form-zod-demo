@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
       - uses: nemolize/actions/setup@ffbe3737f01cb4e563dd19424761da8c3c9a9173 # v1.2.0
       - run: pnpm lint
 
@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
       - uses: nemolize/actions/setup@ffbe3737f01cb4e563dd19424761da8c3c9a9173 # v1.2.0
       - run: pnpm test
 
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
       - uses: nemolize/actions/setup@ffbe3737f01cb4e563dd19424761da8c3c9a9173 # v1.2.0
       - run: npx playwright install chromium
       - run: pnpm test:e2e
